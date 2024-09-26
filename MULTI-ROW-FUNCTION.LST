@@ -1,0 +1,169 @@
+SQL> --1--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE SAL < 2000 AND DEPTNO IN '10';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+
+SQL> --2--
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'CLERK';
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      4150                                                                                                                                                                                              
+
+SQL> --3--
+SQL> SELECT AVU(SAL)
+  2  FROM EMP
+  3  /
+SELECT AVU(SAL)
+       *
+ERROR at line 1:
+ORA-00904: "AVU": invalid identifier 
+
+
+SQL> SELECT AVG(SAL)
+  2  FROM EMP;
+
+  AVG(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+2073.21429                                                                                                                                                                                              
+
+SQL> --4--
+SQL> SELECT COUNT(ENAME)
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'A%';
+
+COUNT(ENAME)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           2                                                                                                                                                                                            
+
+SQL> --5--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE JOB IN 'CLERK,MANAGER';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         0                                                                                                                                                                                              
+
+SQL> --6--
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  /
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+     29025                                                                                                                                                                                              
+
+SQL> --7--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE MGR IN '7839';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+SQL> --8--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE COMM IS NULL AND DEPTNO IN 30;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+
+SQL> --9--
+SQL> SELECT AVG(SAL),SUM(SAL),COUNT(*),MAX(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'PRESIDENT';
+
+  AVG(SAL)   SUM(SAL)   COUNT(*)   MAX(SAL)                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+      5000       5000          1       5000                                                                                                                                                             
+
+SQL> --10--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         0                                                                                                                                                                                              
+
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         7                                                                                                                                                                                              
+
+SQL> --11--
+SQL> SELECT COUNT(*),SUM(SAL)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%LL%';
+
+  COUNT(*)   SUM(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         2       2900                                                                                                                                                                                   
+
+SQL> --12--
+SQL> SELECT COUNT(*)
+  2  FROM EMP;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        14                                                                                                                                                                                              
+
+SQL> SELECT COUNT(DEPTNO)
+  2  FROM EMP;
+
+COUNT(DEPTNO)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+           14                                                                                                                                                                                           
+
+SQL> --13--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%Z%';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         0                                                                                                                                                                                              
+
+SQL> --14--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%S%';
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         5                                                                                                                                                                                              
+
+SQL> --15--
+SQL> SELECT  SUM(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'CLERK' AND DEPTNO IN '30';
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       950                                                                                                                                                                                              
+
+SQL> --16--
+SQL> SELECT MAX(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'ANALYST';
+
+  MAX(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      3000                                                                                                                                                                                              
+
+SQL> 
+SQL> SPOOL OFF;
