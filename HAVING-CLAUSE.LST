@@ -1,0 +1,174 @@
+SQL> --1--
+SQL> SELECT COUNT(*),DEPTNO
+  2  FROM EMP
+  3  WHERE JOB='CLERK'
+  4  GROUP BY DEPTNO
+  5  HAVING COUNT(*)>=3;
+
+no rows selected
+
+SQL> --2--
+SQL> SELECT SUM(SAL),DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING SUM(SAL)>=4;
+
+  SUM(SAL)     DEPTNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+      9400         30                                                                                                                                                                                   
+     10875         20                                                                                                                                                                                   
+      8750         10                                                                                                                                                                                   
+
+SQL> SELECT COUNT(*),DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING COUNT(*)>=4;
+
+  COUNT(*)     DEPTNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         6         30                                                                                                                                                                                   
+         5         20                                                                                                                                                                                   
+
+SQL> --3--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE SAL>1200
+  4  GROUP BY JOB
+  5  HAVING SUM(SAL)>3800;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+
+SQL> --4--
+SQL> SELECT COUNT(*),DEPTNO
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER'
+  4  GROUP BY DEPTNO
+  5  HAVING COUNT(*)=2;
+
+no rows selected
+
+SQL> --5--
+SQL> SELECT MAX(SAL),JOB
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  HAVING MAX(SAL)>2600;
+
+  MAX(SAL) JOB                                                                                                                                                                                          
+---------- ---------                                                                                                                                                                                    
+      5000 PRESIDENT                                                                                                                                                                                    
+      2975 MANAGER                                                                                                                                                                                      
+      3000 ANALYST                                                                                                                                                                                      
+
+SQL> --6--
+SQL> SELECT SAL
+  2  FROM EMP
+  3  GROUP BY SAL
+  4  HAVING COUNT(SAL)=2;
+
+       SAL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1250                                                                                                                                                                                              
+      3000                                                                                                                                                                                              
+
+SQL> --7--SELECT HIREDATE
+SQL> FROM EMP
+SP2-0042: unknown command "FROM EMP" - rest of line ignored.
+SQL> GROUP BY HIREDATE
+SP2-0734: unknown command beginning "GROUP BY H..." - rest of line ignored.
+SQL> 
+SQL> SELECT HIREDATE
+  2  FROM EMP
+  3  GROUP BY HIREDATE
+  4  HAVING COUNT(HIREDATE)=2;
+
+HIREDATE                                                                                                                                                                                                
+---------                                                                                                                                                                                               
+03-DEC-81                                                                                                                                                                                               
+
+SQL> SELECT AVG(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING AVG(SAL)<2000;
+
+  AVG(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+1566.66667                                                                                                                                                                                              
+
+SQL> --9--
+SQL> EDIT
+Wrote file afiedt.buf
+
+  1  SELECT AVG(SAL),DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4* HAVING AVG(SAL)<2000
+SQL> /
+
+  AVG(SAL)     DEPTNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+1566.66667         30                                                                                                                                                                                   
+
+SQL> --8--
+SQL> SELECT AVG(SAL),DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING AVG(SAL)<3000;
+
+  AVG(SAL)     DEPTNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+1566.66667         30                                                                                                                                                                                   
+      2175         20                                                                                                                                                                                   
+2916.66667         10                                                                                                                                                                                   
+
+SQL> --9--
+SQL> SELECT DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  WHERE ENAME LIKE '%A%'OR ENAME LIKE '%S%'
+  5  HAVING COUNT(*)>2;
+WHERE ENAME LIKE '%A%'OR ENAME LIKE '%S%'
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT DEPTNO
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%'OR ENAME LIKE '%S%'
+  4  GROUP BY DEPTNO
+  5* HAVING COUNT(*)>2
+SQL> 
+SQL> /
+
+    DEPTNO                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        30                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+
+SQL> --10--
+SQL> SELECT COUNT(*),DEPTNO
+  2  FROM EMP
+  3  WHERE JOB ='CLERK'
+  4  GROUP BY DEPTNO
+  5  
+SQL> --10--
+SQL> SELECT MIN(SAL),MAX(SAL)
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  HAVING MIN(SAL)>1000 AND MAX(SAL)<5000;
+
+  MIN(SAL)   MAX(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+      1250       1600                                                                                                                                                                                   
+      2450       2975                                                                                                                                                                                   
+      3000       3000                                                                                                                                                                                   
+
+SQL> SPOOL OFF;
